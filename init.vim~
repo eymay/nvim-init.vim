@@ -1,0 +1,26 @@
+""" Eymen's Neovim Init.vim
+
+""" Vim-Plug
+call plug#begin()
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'neovim/nvim-lspconfig'
+call plug#end()
+
+""" Core plugin configuration (lua)
+lua << EOF
+--servers = {
+  --  'pyright',
+    --'tsserver', -- uncomment for typescript. See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md for other language servers
+--}
+require('treesitter-config')
+--require('nvim-cmp-config')
+--require('lspconfig-config')
+--require('telescope-config')
+--require('lualine-config')
+--require('nvim-tree-config')
+--require('diagnostics')
+EOF
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable        	
