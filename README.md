@@ -4,7 +4,7 @@ Based on (Optixal's init.vim)[https://github.com/Optixal/neovim-init.vim].
 
 Plugins Used for:
 * IDE-like features
- * Treesitter
+  * Treesitter
   * lspconfig
   * Github Copilot
   * Telescope
