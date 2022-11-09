@@ -19,5 +19,5 @@ Plugins Used for:
   * Kanagawa theme
   * Tokyo Night theme
 
-<SPACE> for leader
+\<SPACE\> for leader
 
