@@ -1,6 +1,6 @@
 # nvim-init.vim
 
-Based on (Optixal's init.vim)[https://github.com/Optixal/neovim-init.vim].
+Based on [ Optixal's init.vim ]( https://github.com/Optixal/neovim-init.vim ).
 
 Plugins Used for:
 * IDE-like features
