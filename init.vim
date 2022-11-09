@@ -46,6 +46,9 @@ EOF
 """ Space Bar as Leader Key
 nnoremap <SPACE> <Nop>
 let mapleader = " "
+nmap <leader>s :so ~/.config/nvim/init.vim<CR>
+nmap <leader>b :NvimTreeFindFileToggle<CR>
+nmap <leader>j <C-w>v<C-w>l:terminal<CR>:set nonumber<CR><S-a>
 
 """Terminal Mapping
 tnoremap <leader><Esc> <C-\><C-n>
