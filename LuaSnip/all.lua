@@ -43,7 +43,7 @@ return
         t("`"),
       }),
     -- Paired double quotes
-    s({trig = '"', wordTrig = false, snippetType="autosnippet", priority=2000},
+    s({trig = '[^"]"', wordTrig = false, snippetType="autosnippet", priority=2000},
       fmta(
         '"<>"',
         {

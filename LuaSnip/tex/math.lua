@@ -15,16 +15,17 @@ return
         "$<>$",
         {
           i(1),
-        })),
-        s({trig = "([^%a])mm", wordTrig = false, regTrig = true},
-          fmta(
+        })
+        ),
+   s({trig = "([^%a])mm", wordTrig = false, regTrig = true},
+       fmta(
             "<>$<>$",
             {
               f( function(_, snip) return snip.captures[1] end ),
               d(1, get_visual),
             }
           )
-        ),
+        ), 
   -- SUPERSCRIPT
   -- type '
   s({trig = "([%w%)%]%}])'", wordTrig=false, regTrig = true, snippetType="autosnippet"},
@@ -37,6 +38,7 @@ return
     ),
     {condition = tex.in_mathzone}
   ),
+
   -- SUBSCRIPT
   -- type ;
   s({trig = "([%w%)%]%}]);", wordTrig=false, regTrig = true, snippetType="autosnippet"},
@@ -129,11 +131,10 @@ return
     ),
     {condition = tex.in_mathzone}
   ),
-
-  -- DERIVATIVE with denominator only
+    -- DERIVATIVE with denominator only
   s({trig = "([^%a])dV", wordTrig = false, regTrig = true, snippetType="autosnippet"},
     fmta(
-      "<>\\frac{\\mathrm{d}}{\\mathrm{d} <>}"
+      "<>\\frac{\\mathrm{d}}{\\mathrm{d} <>}",
       {
         f( function(_, snip) return snip.captures[1] end ),
         d(1, get_visual),
@@ -141,31 +142,7 @@ return
     ),
     {condition = tex.in_mathzone}
   ),
-  -- DERIVATIVE with numerator and denominator
-  s({trig = "([^%a])dvv", wordTrig = false, regTrig = true, snippetType="autosnippet"},
-    fmta(
-      "<>\\frac{\\mathrm{d} <>}{\\mathrm{d} <>}",
-      {
-        f( function(_, snip) return snip.captures[1] end ),
-        i(1),
-        i(2)
-      }
-    ),
-    {condition = tex.in_mathzone}
-  ),
-
-  -- PARTIAL DERIVATIVE with denominator only
-  s({trig = "([^%a])pV", wordTrig = false, regTrig = true, snippetType="autosnippet"},
-    fmta(
-      "<>\\frac{\\partial}{\\partial <>}",
-      {
-        f( function(_, snip) return snip.captures[1] end ),
-        d(1, get_visual),
-      }
-    ),
-    {condition = tex.in_mathzone}
-  ),
-  -- PARTIAL DERIVATIVE with numerator and denominator
+    -- PARTIAL DERIVATIVE with numerator and denominator
   s({trig = "([^%a])pvv", wordTrig = false, regTrig = true, snippetType="autosnippet"},
     fmta(
       "<>\\frac{\\partial <>}{\\partial <>}",
@@ -211,5 +188,6 @@ return
     ),
     {condition = tex.in_mathzone}
   ),
-
-  }
+  
+ } 
+ 
