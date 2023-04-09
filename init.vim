@@ -4,7 +4,13 @@
 call plug#begin()
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
-Plug 'github/copilot.vim'
+"""Plug 'github/copilot.vim'
+""" Cmp
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 """ Telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -21,8 +27,15 @@ Plug 'tpope/vim-sensible'
 """ Surrounding character operations
 Plug 'tpope/vim-surround'
 """ Enhancement to writing
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'L3MON4D3/LuaSnip', {'tag': 'v1.2.1.*', 'do': 'make install_jsregexp'}
+Plug 'saadparwaiz1/cmp_luasnip'
+"""""" Markdown
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+"""""" Latex
+Plug 'lervag/vimtex'
+""" Footer
 Plug 'nvim-lualine/lualine.nvim' 
 """ Themes
 Plug 'marko-cerovac/material.nvim'
@@ -46,6 +59,7 @@ require('lspconfig-config')
 require('telescope-config')
 --require('codelldb-config')
 require('lualine-config')
+require('luasnip-config')
 require('material-config')
 require('nvim-tree-config')
 --require('diagnostics')
@@ -78,6 +92,12 @@ colorscheme kanagawa
 autocmd FileType llvm,tablegen nmap <buffer><silent>gK <Plug>(llvm-goto-definition)
 autocmd BufRead *.png,*.pdf,*.dot !xdg-open %
 autocmd BufRead *.mp4 !vlc %
+
+""" Markdown
+"autocmd filetype markdown syn region match start=/\\$\\$/ end=/\\$\\$/
+"autocmd filetype markdown syn match math '\\$[^$].\{-}\$'
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1
 "Treesitter folding
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
@@ -90,7 +110,9 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fc <cmd>Telescope colorscheme<cr>
 nnoremap <leader>f/ <cmd>Telescope current_buffer_fuzzy_find<cr>
 
-" LuaSnip mappings
+" LuaSnip 
+lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
+" mappings
 " Use Tab to expand and jump through snippets
 imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
 smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>'
@@ -98,3 +120,4 @@ smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Ta
 " Use Shift-Tab to jump backwards through snippets
 imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
 smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+
