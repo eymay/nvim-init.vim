@@ -3,20 +3,26 @@
 """ Vim-Plug
 call plug#begin()
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
-"""Plug 'github/copilot.vim'
+Plug 'zbirenbaum/copilot.lua'
+Plug 'zbirenbaum/copilot-cmp'
 """ Cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind.nvim'
 """ Telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-telescope/telescope-media-files.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'tzachar/fuzzy.nvim'
+Plug 'tzachar/cmp-fuzzy-path'
 """ File Explorer
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plug 'nvim-tree/nvim-tree.lua'
@@ -53,8 +59,11 @@ lua << EOF
   --  'pyright',
     --'tsserver', -- uncomment for typescript. See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md for other language servers
 --}
+require("mason").setup()
+require("mason-lspconfig").setup()
 require('treesitter-config')
---require('nvim-cmp-config')
+require('copilot-config')
+require('nvim-cmp-config')
 require('lspconfig-config')
 require('telescope-config')
 --require('codelldb-config')
@@ -64,6 +73,8 @@ require('material-config')
 require('nvim-tree-config')
 --require('diagnostics')
 vim.g.material_style = "oceanic"
+vim.lsp.set_log_level("debug")
+
 EOF
 
 """ Space Bar as Leader Key
