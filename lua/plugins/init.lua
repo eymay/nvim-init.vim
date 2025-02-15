@@ -49,7 +49,8 @@ return {
             cmp.setup({
                 formatting = lsp_zero.cmp_format({details = true}),
                 mapping = cmp.mapping.preset.insert({
-                    ['<C-Space>'] = cmp.mapping.complete(),
+		    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                    ['<C-Enter>'] = cmp.mapping.complete(),
                     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
                     ['<C-d>'] = cmp.mapping.scroll_docs(4),
                     ['<C-f>'] = cmp_action.luasnip_jump_forward(),
@@ -107,20 +108,39 @@ return {
             -- add any options here
         },
         lazy = false
-    }, {"lervag/vimtex", lazy = false}, {
+    }, {
+		"lervag/vimtex", lazy = false,
+		    init = function()
+			vim.g.vimtex_view_automatic = 0
+		    end
+	}, {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
     }, {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.6',
         -- or                              , branch = '0.1.x',
-        dependencies = {'nvim-lua/plenary.nvim'}
+        dependencies = {'nvim-lua/plenary.nvim'},
+	config = function() require("telescope").setup {
+			pickers = {
+			  find_files = {
+			    find_command = {'rg', '--files', '--hidden', '--glob', '!.git/*'},
+				},
+			},
+		} end
     }, {
         "nvim-tree/nvim-tree.lua",
         version = "*",
         lazy = false,
         dependencies = {"nvim-tree/nvim-web-devicons"},
-        config = function() require("nvim-tree").setup {} end
+		config = function() require("nvim-tree").setup {
+			git = {
+				enable = true,
+				ignore = false,
+				timeout = 500,
+			},
+		} end
     }, {"tpope/vim-fugitive", lazy = false}
+     , {"tpope/vim-surround", lazy = false}
 
 }
