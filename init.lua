@@ -14,10 +14,12 @@ vim.g.maplocalleader = " "
 require("lazy").setup("plugins")
 vim.api.nvim_set_option("clipboard", "unnamed")
 
+vim.opt.signcolumn = "yes"
+
 -- Configure diagnostics for Neovim 0.11
 -- Virtual text is disabled by default in 0.11
 vim.diagnostic.config({
-    virtual_text = true,  -- Re-enable if you want virtual text diagnostics
+    virtual_text = true,  -- Enable inline diagnostics
     severity_sort = true,
     underline = true,
     update_in_insert = false,
@@ -46,3 +48,7 @@ vim.g.markdown_fenced_languages = {'mlir'}
 -- vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol, { desc = 'Document symbols' })
 -- vim.keymap.set({'n', 'v'}, 'gra', vim.lsp.buf.code_action, { desc = 'Code action' })
 -- vim.keymap.set({'i', 's'}, '<C-s>', vim.lsp.buf.signature_help, { desc = 'Signature help' })
+-- Simple LSP configuration that should definitely work
+-- Add this to the end of your init.lua (or create a separate file like lsp.lua and require it)
+
+require("lsp")
