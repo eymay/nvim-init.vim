@@ -26,6 +26,7 @@ return {
     end
 }, 
 	{'williamboman/mason.nvim', lazy = false, config = true},
+	{'llvm/llvm.vim', lazy = false},
     -- Source https://lsp-zero.netlify.app/v3.x/guide/lazy-loading-with-lazy-nvim
      {
         'hrsh7th/nvim-cmp',
